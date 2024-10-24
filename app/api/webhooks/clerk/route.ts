@@ -6,6 +6,7 @@ import { NextResponse } from "next/server";
 import { Webhook } from "svix";
 
 import { createUser, deleteUser, updateUser } from "@/lib/actions/user.action";
+import { CreateUserParams } from "@/types";
 
 export async function POST(req: Request) {
     // You can find this in the Clerk Dashboard -> Webhooks -> choose the webhook
@@ -70,7 +71,7 @@ export async function POST(req: Request) {
             photo: image_url,
         };
 
-        const newUser = await createUser(user);
+        const newUser = await createUser(<CreateUserParams> user);
 
         // Set public metadata
         if (newUser) {
